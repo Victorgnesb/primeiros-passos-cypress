@@ -1,4 +1,4 @@
-import userData from '../fixtures/userdata.json'
+import userData from '../fixtures/users/userdata.json'
 
 describe('Orage HRM Tests', () => {
 
@@ -13,7 +13,7 @@ describe('Orage HRM Tests', () => {
 
 
   it('login - Sucessfull', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.visit('/auth/login')
     cy.get(selectorsList.usernameField) .type(userData.userSucess.username)
     cy.get(selectorsList.passwordField) .type(userData.userSucess.passowrd)
     cy.get(selectorsList.loginButton) .click()
@@ -21,7 +21,7 @@ describe('Orage HRM Tests', () => {
     cy.get(selectorsList.dashboardGrid)
   })
   it('login - Fail', () => {
-    cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
+    cy.visit('/auth/login')
     cy.get(selectorsList.usernameField) .type(userData.userFail.username)
     cy.get(selectorsList.passwordField) .type(userData.userFail.password)
     cy.get(selectorsList.loginButton) .click()
