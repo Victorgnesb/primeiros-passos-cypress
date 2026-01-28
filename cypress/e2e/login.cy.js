@@ -1,3 +1,5 @@
+import userData from '../fixtures/userdata.json'
+
 describe('Orage HRM Tests', () => {
 
   const selectorsList = {
@@ -9,19 +11,6 @@ describe('Orage HRM Tests', () => {
     dashboardGrid : ".orangehrm-dashboard-grid"
   }
 
-  const userData = {
-    userSucess: {
-      username : "Admin",
-      passowrd : "admin123"
-    },
-
-    userFail: {
-      username : "test",
-      password : "test"
-
-    }
-     
-  }
 
   it('login - Sucessfull', () => {
     cy.visit('https://opensource-demo.orangehrmlive.com/web/index.php/auth/login')
