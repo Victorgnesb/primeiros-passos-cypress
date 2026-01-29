@@ -28,7 +28,7 @@ describe('Orage HRM Tests', () => {
     cy.get(selectorsList.MyInfoButton) .click()
     cy.get(selectorsList.firstNameField) .clear() .type('Harry')
     cy.get(selectorsList.middleNameField) .clear() .type('James')
-    cy.get(selectorsList.lastNameField).eq(3) .clear() .type('Potter')
+    cy.get(selectorsList.lastNameField) .clear() .type('Potter')
     cy.get(selectorsList.otherIdField).eq(4) .clear()  .type('testv')
     cy.get(selectorsList.driversLicenseNumberField).eq(5) .clear() .type('123456')
     
