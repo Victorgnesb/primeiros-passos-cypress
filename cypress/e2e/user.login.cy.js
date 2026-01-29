@@ -8,17 +8,30 @@ describe('Orage HRM Tests', () => {
     loginButton : "[type='submit']",
     sectionTitleTopBar : ".oxd-topbar-header-breadcrumb-module",
     wrongCredentialAlert : "[role='alert']",
-    dashboardGrid : ".orangehrm-dashboard-grid"
+    dashboardGrid : ".orangehrm-dashboard-grid",
+    MyInfoButton : "[href='/web/index.php/pim/viewMyDetails']",
+    firstNameField : "[name='firstName']",
+    middleNameField : "[name='middleName']",
+    lastNameField : "[name='lastName']",
+    employeeIdField : ".oxd-input--active",
+    otherIdField : ".oxd-input",
+    driversLicenseNumberField : ".oxd-input"
   }
 
-
-  it('login - Sucessfull', () => {
+  it.only('User Info Update - Sucessfull', () => {
     cy.visit('/auth/login')
     cy.get(selectorsList.usernameField) .type(userData.userSucess.username)
     cy.get(selectorsList.passwordField) .type(userData.userSucess.passowrd)
     cy.get(selectorsList.loginButton) .click()
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
+    cy.get(selectorsList.MyInfoButton) .click()
+    cy.get(selectorsList.firstNameField) .clear() .type('Harry')
+    cy.get(selectorsList.middleNameField) .clear() .type('James')
+    cy.get(selectorsList.lastNameField).eq(3) .clear() .type('Potter')
+    cy.get(selectorsList.otherIdField).eq(4) .clear()  .type('testv')
+    cy.get(selectorsList.driversLicenseNumberField).eq(5) .clear() .type('123456')
+    
   })
   it('login - Fail', () => {
     cy.visit('/auth/login')
