@@ -14,8 +14,14 @@ describe('Orage HRM Tests', () => {
     middleNameField : "[name='middleName']",
     lastNameField : "[name='lastName']",
     employeeIdField : ".oxd-input--active",
-    otherIdField : ".oxd-input",
-    driversLicenseNumberField : ".oxd-input"
+    genericField : ".oxd-input",
+    gerericDateField : "[placeholder='yyyy-dd-mm']",
+    genericIndexField : "[tabindex='0']",
+    dateCloseButton : ".--close",
+    testField : "[options='']",
+    submitButton : "[type='submit']"
+    //otherIdField : ".oxd-input",
+    //driversLicenseNumberField : ".oxd-input"
   }
 
   it.only('User Info Update - Sucessfull', () => {
@@ -29,9 +35,21 @@ describe('Orage HRM Tests', () => {
     cy.get(selectorsList.firstNameField) .clear() .type('Harry')
     cy.get(selectorsList.middleNameField) .clear() .type('James')
     cy.get(selectorsList.lastNameField) .clear() .type('Potter')
-    cy.get(selectorsList.otherIdField).eq(4) .clear()  .type('testv')
-    cy.get(selectorsList.driversLicenseNumberField).eq(5) .clear() .type('123456')
-    
+    cy.get(selectorsList.genericField).eq(4) .clear()  .type('testv')
+    cy.get(selectorsList.genericField).eq(5) .clear() .type('123456')
+    cy.get(selectorsList.gerericDateField).eq(0) .type('2024-10-10')
+    cy.get(selectorsList.dateCloseButton) .click()
+    cy.get(selectorsList.genericIndexField).eq(0) .type('A')
+    cy.get(selectorsList.genericIndexField).eq(1) .type('A')
+    cy.get(selectorsList.gerericDateField).eq(1) .type('1993-10-12')
+    cy.get(selectorsList.dateCloseButton) .click()
+    cy.get(selectorsList.submitButton).eq(1) .click()
+    cy.get('body') .should('contain', 'Successfully Saved')
+    cy.get(selectorsList.genericIndexField).eq(2) .type('A')
+    cy.get(selectorsList.testField) .clear() .type('Teste1')
+    cy.get(selectorsList.submitButton).eq(1) .click()
+    cy.get('body') .should('contain', 'Successfully Saved')
+       
   })
   it('login - Fail', () => {
     cy.visit('/auth/login')
