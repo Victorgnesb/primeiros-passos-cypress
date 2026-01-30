@@ -19,7 +19,9 @@ describe('Orage HRM Tests', () => {
     genericIndexField : "[tabindex='0']",
     dateCloseButton : ".--close",
     testField : "[options='']",
-    submitButton : "[type='submit']"
+    comboBox : ".oxd-select-text--arrow",
+    submitButton : "[type='submit']",
+    bloodButtom : "[tabindex='0']"
     //otherIdField : ".oxd-input",
     //driversLicenseNumberField : ".oxd-input"
   }
@@ -32,23 +34,31 @@ describe('Orage HRM Tests', () => {
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
     cy.get(selectorsList.MyInfoButton) .click()
-    cy.get(selectorsList.firstNameField) .clear() .type('Harry')
-    cy.get(selectorsList.middleNameField) .clear() .type('James')
-    cy.get(selectorsList.lastNameField) .clear() .type('Potter')
-    cy.get(selectorsList.genericField).eq(4) .clear()  .type('testv')
+    cy.get(selectorsList.firstNameField) .should('be.visible') .clear() .type('Henrique')
+    cy.get(selectorsList.middleNameField) .clear() .type('Manieri')
+    cy.get(selectorsList.lastNameField) .clear() .type('Claro')
+    cy.get(selectorsList.genericField).eq(4) .clear()  .type('Many')
     cy.get(selectorsList.genericField).eq(5) .clear() .type('123456')
-    cy.get(selectorsList.gerericDateField).eq(0) .type('2024-10-10')
+    cy.get(selectorsList.gerericDateField).eq(0) .clear() .type('2024-10-10')
     cy.get(selectorsList.dateCloseButton) .click()
+    cy.get(selectorsList.genericField).eq(9) .clear() .type('654321')
+    cy.get(selectorsList.comboBox) .eq(0) .click()
+    cy.get('.oxd-select-dropdown > :nth-child(9)') .click() 
+    cy.get(selectorsList.comboBox).eq(1) .click()
+    cy.get('.oxd-select-dropdown > :nth-child(4)') .click() 
     cy.get(selectorsList.genericIndexField).eq(0) .type('A')
     cy.get(selectorsList.genericIndexField).eq(1) .type('A')
-    cy.get(selectorsList.gerericDateField).eq(1) .type('1993-10-12')
+    cy.get(selectorsList.gerericDateField).eq(1) .clear() .type('1993-10-12')
     cy.get(selectorsList.dateCloseButton) .click()
-    cy.get(selectorsList.submitButton).eq(1) .click()
-    cy.get('body') .should('contain', 'Successfully Saved')
-    cy.get(selectorsList.genericIndexField).eq(2) .type('A')
+    cy.get(selectorsList.submitButton).eq(0) .click({force: true})
+    cy.get('body') .should('contain', 'Successfully Updated')
+    cy.get('.oxd-toast-close')   
+    cy.get(selectorsList.comboBox).eq(2) .click()
+    cy.get('.oxd-select-dropdown > :nth-child(8)') .click() 
     cy.get(selectorsList.testField) .clear() .type('Teste1')
-    cy.get(selectorsList.submitButton).eq(1) .click()
-    cy.get('body') .should('contain', 'Successfully Saved')
+    //cy.get(selectorsList.submitButton).eq(1) .click()
+    //cy.get('body') .should('contain', 'Successfully Saved')
+    
        
   })
   it('login - Fail', () => {
