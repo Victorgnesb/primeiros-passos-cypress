@@ -1,45 +1,40 @@
 import userData from '../fixtures/users/userdata.json'
 import LoginPage from '../pages/loginPage.js'
+import DashboardPage from '../pages/dashboardPage.js'
+import MenuPage from '../pages/menuPage.js'
 
 const loginPage = new LoginPage()
+const dashboardPage = new DashboardPage()
+const menuPage = new MenuPage()
 
 describe('Orage HRM Tests', () => {
 
   const selectorsList = {
-    sectionTitleTopBar : ".oxd-topbar-header-breadcrumb-module",
-    dashboardGrid : ".orangehrm-dashboard-grid",
-    MyInfoButton : "[href='/web/index.php/pim/viewMyDetails']",
     firstNameField : "[name='firstName']",
     middleNameField : "[name='middleName']",
     lastNameField : "[name='lastName']",
-    employeeIdField : ".oxd-input--active",
     genericField : ".oxd-input",
-    gerericDateField : "[placeholder='yyyy-dd-mm']",
+    gerericDateField : ".oxd-date-input",
     genericIndexField : "[tabindex='0']",
     dateCloseButton : ".--close",
     testField : "[options='']",
     comboBox : ".oxd-select-text--arrow",
     submitButton : "[type='submit']",
     bloodButtom : "[tabindex='0']"
-    //otherIdField : ".oxd-input",
-    //driversLicenseNumberField : ".oxd-input"
+
   }
 
   it.only('User Info Update - Sucessfull', () => {
     loginPage.accessLoginPage() 
     loginPage.loginWithUser(userData.userSucess.username, userData.userSucess.passowrd)
-    // cy.get(selectorsList.usernameField) .type(userData.userSucess.username)
-    // cy.get(selectorsList.passwordField) .type(userData.userSucess.passowrd)
-    // cy.get(selectorsList.loginButton) .click()
-    cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
-    cy.get(selectorsList.dashboardGrid)
-    cy.get(selectorsList.MyInfoButton) .click()
+    dashboardPage.checkDashboardPage()
+    menuPage.acessMyInfo() 
     cy.get(selectorsList.firstNameField) .should('be.visible') .clear() .type('Henrique')
     cy.get(selectorsList.middleNameField) .clear() .type('Manieri')
     cy.get(selectorsList.lastNameField) .clear() .type('Claro')
     cy.get(selectorsList.genericField).eq(4) .clear()  .type('Many')
     cy.get(selectorsList.genericField).eq(5) .clear() .type('123456')
-    cy.get(selectorsList.gerericDateField).eq(0) .clear() .type('2024-10-10')
+    cy.get(selectorsList.gerericDateField) .eq(0) .clear() .type('2024-10-10')
     cy.get(selectorsList.dateCloseButton) .click()
     cy.get(selectorsList.genericField).eq(9) .clear() .type('654321')
     cy.get(selectorsList.comboBox) .eq(0) .click()
@@ -56,8 +51,7 @@ describe('Orage HRM Tests', () => {
     cy.get(selectorsList.comboBox).eq(2) .click()
     cy.get('.oxd-select-dropdown > :nth-child(8)') .click() 
     cy.get(selectorsList.testField) .clear() .type('Teste1')
-    //cy.get(selectorsList.submitButton).eq(1) .click()
-    //cy.get('body') .should('contain', 'Successfully Saved')
+
     
        
   })
