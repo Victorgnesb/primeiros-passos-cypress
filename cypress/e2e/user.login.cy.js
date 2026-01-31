@@ -1,13 +1,12 @@
 import userData from '../fixtures/users/userdata.json'
+import LoginPage from '../pages/loginPage.js'
+
+const loginPage = new LoginPage()
 
 describe('Orage HRM Tests', () => {
 
   const selectorsList = {
-    usernameField : "[name='username']",
-    passwordField : "[name='password']",
-    loginButton : "[type='submit']",
     sectionTitleTopBar : ".oxd-topbar-header-breadcrumb-module",
-    wrongCredentialAlert : "[role='alert']",
     dashboardGrid : ".orangehrm-dashboard-grid",
     MyInfoButton : "[href='/web/index.php/pim/viewMyDetails']",
     firstNameField : "[name='firstName']",
@@ -27,10 +26,11 @@ describe('Orage HRM Tests', () => {
   }
 
   it.only('User Info Update - Sucessfull', () => {
-    cy.visit('/auth/login')
-    cy.get(selectorsList.usernameField) .type(userData.userSucess.username)
-    cy.get(selectorsList.passwordField) .type(userData.userSucess.passowrd)
-    cy.get(selectorsList.loginButton) .click()
+    loginPage.accessLoginPage() 
+    loginPage.loginWithUser(userData.userSucess.username, userData.userSucess.passowrd)
+    // cy.get(selectorsList.usernameField) .type(userData.userSucess.username)
+    // cy.get(selectorsList.passwordField) .type(userData.userSucess.passowrd)
+    // cy.get(selectorsList.loginButton) .click()
     cy.location('pathname').should('equal', '/web/index.php/dashboard/index')
     cy.get(selectorsList.dashboardGrid)
     cy.get(selectorsList.MyInfoButton) .click()
