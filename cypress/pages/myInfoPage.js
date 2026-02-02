@@ -13,6 +13,7 @@ class MyInfoPage {
             testField : "[options='']",
             comboBox : ".oxd-select-text--arrow",
             submitButton : "[type='submit']",
+            
             //bloodButtom : "[tabindex='0']"            
 
         }
@@ -54,7 +55,8 @@ class MyInfoPage {
         cy.get(this.selectorsList() .genericIndexField) .eq(2) .type(bloodType)
         cy.get(this.selectorsList() .testField) .type(testField) 
         }
-
+    
+    
     
 
 }

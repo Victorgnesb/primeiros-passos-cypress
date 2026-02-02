@@ -5,7 +5,8 @@ class LoginPage {
             usernameField : "[name='username']",
             passwordField : "[name='password']",
             loginButton : "[type='submit']",
-            wrongCredentialAlert : "[role='alert']"
+            wrongCredentialAlert : "[role='alert']",
+            loginError : ".oxd-alert"
 
         }
         
@@ -20,6 +21,10 @@ class LoginPage {
         cy.get(this.selectorsList() .passwordField) .type(password) 
         cy.get(this.selectorsList() .loginButton) .click()
 
+    }
+
+    loginError(){
+        cy.get(this.selectorsList() .loginError) .should('be.visible')
     }
     
 }
