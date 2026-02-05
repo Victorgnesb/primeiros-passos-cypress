@@ -2,8 +2,8 @@ class LoginPage {
 
     selectorsList() {
         const selectors = {
-            usernameField : "[name='username']",
-            passwordField : "[name='password']",
+            usernameField : "[name ='username']",
+            passwordField : "[name ='password']",
             loginButton : "[type='submit']",
             wrongCredentialAlert : "[role='alert']",
             loginError : ".oxd-alert"
@@ -24,7 +24,7 @@ class LoginPage {
     }
 
     loginError(){
-        cy.get(this.selectorsList() .loginError) .should('be.visible')
+        cy.get(this.selectorsList() .wrongCredentialAlert) .should('be.visible')
     }
     
 }

@@ -26,15 +26,4 @@ describe('Orage HRM Tests', () => {
        
   })
   
-  it.only('login - Fail', () => {
-    loginPage.accessLoginPage()
-    loginPage.loginWithUser(userData.userFail.username, userData.userFail.password)
-    loginPage.loginError()
-
-    // cy.visit('/auth/login')
-    // cy.get(selectorsList.usernameField) .type(userData.userFail.username)
-    // cy.get(selectorsList.passwordField) .type(userData.userFail.password)
-    // cy.get(selectorsList.loginButton) .click()
-    // cy.get(selectorsList.wrongCredentialAlert)
-  })
 })
