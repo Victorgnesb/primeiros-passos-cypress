@@ -9,7 +9,7 @@
     npm install
     ```
 
-    >**NOTE:**
+    > **NOTE:**
     >
     > it  is necessary to have **node** installed
 
